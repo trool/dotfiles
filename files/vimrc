@@ -1,0 +1,129 @@
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
+set tabstop=2
+set shiftwidth=2
+set nowrap
+set textwidth=80
+set incsearch
+set smartindent
+set showcmd
+set splitbelow
+set nohlsearch
+syntax on
+set expandtab
+set wildmode=longest:full
+set wildmenu
+set visualbell t_vb=
+set nocp
+
+filetype plugin on
+
+let xml_use_xhtml=1
+
+let themeindex=0
+map <F5> :make<Enter> 
+map <F4> :noh<Enter> 
+map <C-z> :set invnumber<Enter>
+
+map <C-p> :FufFile **/<CR>
+map <C-y> ,#
+map <C-t> ,$
+
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
+
+map <C-f> {gq}
+
+map <C-n> :NERDTreeToggle<CR>
+map <C-b> :NERDTree<CR>:BookmarkToRoot 
+
+colorscheme darkocean
+set background=dark
+
+map ,c gcc
+
+au BufNewFile,BufRead *.rhtml set syn=eruby
+au BufNewFile,BufRead *.rsel set syn=ruby
+au BufNewFile,BufRead *.erb set syn=eruby
+au BufNewFile,BufRead *.tex set syn=tex
+au BufNewFile,BufRead *.mm set syn=objc
+
+au BufRead,BufNewFile *.scss set ft=scss.css
+au BufRead,BufNewFile *.sass set ft=sass.css
+
+augroup syntax
+    autocmd!
+    autocmd BufRead,BufNewFile *.template setfiletype cpp
+augroup end
+
+"augroup commenting
+"    autocmd!
+"    " comment
+""    autocmd FileType ruby,python,perl,sh map ,# :s/^/#1/<CR>
+"    autocmd FileType objc,c,cpp map ,# :s/^/\/\//<CR>
+"    autocmd FileType tex,matlab map ,# :s/^/%/<CR>
+"    " uncomment
+"    autocmd FileType ruby,python,perl,sh map ,$ :s/^#//<CR>
+"    autocmd FileType tex,matlab map ,$ :s/^%//<CR>
+"    autocmd FileType c,cpp map ,$ :s/^\/\///g<CR>
+"    autocmd FileType haml map ,$ :s/^\/\///g<CR>
+"augroup end
+"
+augroup formating
+    autocmd!
+    autocmd BufRead Makefile* set noexpandtab
+    autocmd BufRead *.py set noexpandtab
+    autocmd BufRead,BufNewFile *.txt set nosmartindent
+    autocmd BufRead,BufNewFile *.m set filetype=objc
+    autocmd BufRead,BufNewFile *.mm set filetype=objc
+    autocmd BufRead,BufNewFile *.rdf set filetype=xml
+    autocmd BufRead,BufNewFile *.xul set filetype=xml
+    autocmd BufRead,BufNewFile *.haml set filetype=haml
+    autocmd BufRead,BufNewFile *.haml set textwidth=0
+    autocmd BufRead,BufNewFile *.rb set textwidth=0
+    autocmd BufRead,BufNewFile *.rb set tabstop=2
+    autocmd BufRead,BufNewFile *.rb set shiftwidth=2
+    autocmd BufRead,BufNewFile *.py set textwidth=0
+    autocmd BufRead,BufNewFile *.m set textwidth=0
+    autocmd BufRead,BufNewFile *.c set textwidth=0
+augroup end
+
+if has ("autocmd")
+  filetype plugin indent on
+endif
+
+
+
+set makeprg=rake\ build
+
+nnoremap <F5> :buffers<CR>:buffer<Space>
+
+
+" Load matchit (% to bounce from do to end, etc.)
+runtime! macros/matchit.vim
+
+let mapleader = "\\"
+map <leader>F :FufFile<CR>
+map <leader>f :FufTaggedFile<CR>
+map <leader>t :FufTag<CR>
+map <leader>v :Rview<space>
+map <leader>c :Rcontroller<space>
+map <leader>m :Rmodel<space>
+
+
+au BufReadCmd   *.svc.gz      call tar#Browse(expand("<amatch>"))
+
+" lhs comments
+map ,# :s/^/#/<CR>:nohlsearch<CR>
+map ,/ :s/^/\/\//<CR>
+map ,> :s/^/> /<CR>
+map ," :s/^/\"/<CR>
+map ,% :s/^/%/<CR>
+map ,! :s/^/!/<CR>
+map ,; :s/^/;/<CR>
+map ,- :s/^/--/<CR>
+map ,c :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR> 
+

@@ -1,0 +1,131 @@
+export PATH=$PATH:/bin/
+
+set -o emacs
+set -o notify
+set -o noclobber
+set -o nounset
+#set -o xtrace      # useful for debugging
+
+shopt -s cdspell
+shopt -s cdable_vars
+shopt -s checkhash
+shopt -s checkwinsize
+shopt -s mailwarn
+shopt -s sourcepath
+shopt -s no_empty_cmd_completion
+shopt -s histappend histreedit
+shopt -s extglob        # useful for programmable completion
+
+# Colours
+red='\e[0;31m'
+RED='\e[1;31m'
+green='\e[0;32m'
+GREEN='\e[1;32m'
+blue='\e[0;34m'
+BLUE='\e[1;34m'
+purple='\e[0;35m'
+PURPLE='\e[1;35m'
+cyan='\e[0;36m'
+CYAN='\e[1;36m'
+WHITE='\e[1;37m'
+white='\e[0;37m'
+NC='\e[0m'              # No Colour
+
+HZ=10
+set_prompt ()
+   {
+     local SAVE_CRS=`tput sc 2> /dev/null`
+     local RESET_CRS=`tput rc 2> /dev/null`
+     local CLOCKPOS=`tput cup 0 $(($HZ-10)) 2> /dev/null`
+     local FOREG=`tput setaf 6 2> /dev/null` #4
+     local ALT_FOREG=`tput setaf 3 2> /dev/null` #4
+     local BACKG=`tput setab 0 2> /dev/null` #6
+     local NORMAL=`tput sgr0 2> /dev/null`
+     local BOLD=`tput bold 2> /dev/null`
+		    
+     PS1="\[${NORMAL}${SAVE_CRS}${CLOCKPOS}${FOREG}${BACKG}${BOLD} \@
+           ${RESET_CRS}${BOLD}${ALT_FOREG}\]\u\[${NORMAL}\]@\h:\w\$ "
+   }
+#set_prompt
+
+# Shell prompt
+function fastprompt()
+{
+    unset PROMPT_COMMAND
+#   TIME=$(date +%H:%M)
+    TIME=$(date +%a_%d_%b_%Y)
+    case $TERM in xterm | rxvt | dtterm )
+        PS1="${PURPLE}[\u @ \h : \$TIME ]
+${green}\w ${white}\n$ \[\033]0;[\u@\h] \w\007\]" ;;
+     *)
+        PS1="${blue}[\u @ \h : \$TIME ]  ${green}\w ${WHITE}\n$ " ;;
+    esac
+}
+
+function powerprompt()
+{
+    _powerprompt()
+    {
+        LOAD=$(uptime|sed -e "s/.*: \([^,]*\).*/\1/" -e "s/ //g")
+        TIME=$(date +%H:%M)
+    }
+
+    PROMPT_COMMAND=_powerprompt
+    case $TERM in
+        xterm | dtterm | rxvt )
+            PS1="${RED}[\$TIME \$LOAD]$WHITE\n[\h \#] \W > \[
+\033]0;[\u@\h] \w\007\]" ;;
+        linux )
+            PS1="${GREEN}[\$TIME - \$LOAD]$WHITE\n[\h \#] \w > " ;;
+        * )
+            PS1="[\$TIME - \$LOAD]\n[\h \#] \w > " ;;
+    esac
+}
+
+TIME=$(date +%a_%d_%b_%Y)
+export PS1="${purple}[\u @ \h : \$TIME ]\n${green}\w ${WHITE}\n$ "
+
+# ALIASES 
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+alias h='history'
+alias j='jobs -l'
+alias r='rlogin'
+alias which='type -a'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias cd.='cd ..'
+alias cd..='cd ../..'
+alias cd...='cd ../../..'
+alias path='echo -e ${PATH//:/\\n}'
+alias du='du -h'
+alias df='df -h'
+alias lss='ls -lrS'
+alias lc='ls --color=auto'
+#alias ls='ls --color=auto -F'
+#alias la='ls -AlhF --color=auto |less'
+alias la='ls -AlhF |less'
+alias lr='ls -lhR --color=auto'
+alias lt='ls -lhsrt --color=auto'
+alias lm='ls -lh --color=auto|less'
+alias ll='ls -lh --color=auto|less'
+alias l='ls -l -h --color=auto'
+alias la='ls -alh --color=auto'
+alias dirsh='ls -alF | grep /'
+alias dirs='ls -lF | grep /'
+alias q='exit'
+alias psg='ps -ef | grep '
+alias hsg='history | grep '
+alias pwd='pwd -P'
+alias cd='cd -P'
+
+export EDITOR='/usr/bin/vim'
+
+export PATH=$PATH:'/usr/local/bin'
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+function fing(){
+  find $1 -name $2
+}
