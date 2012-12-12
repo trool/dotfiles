@@ -1,6 +1,7 @@
 [submodule "files/oh-my-zsh"]
 	path = files/oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
+  ignore = dirty
 [submodule "files/vim/bundle/vim-cucumber"]
 	path = files/vim/bundle/vim-cucumber
 	url = https://github.com/tpope/vim-cucumber.git
@@ -34,9 +35,11 @@
 [submodule "files/vim/bundle/fuzzyfinder"]
 	path = files/vim/bundle/fuzzyfinder
 	url = https://github.com/vim-scripts/FuzzyFinder.git
+  ignore = dirty
 [submodule "files/vim/bundle/l9"]
 	path = files/vim/bundle/l9
 	url = https://github.com/vim-scripts/L9.git
+  ignore = dirty
 [submodule "files/vim/bundle/tabular"]
 	path = files/vim/bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
@@ -46,3 +49,4 @@
 [submodule "files/vim/bundle/minibufexpl"]
 	path = files/vim/bundle/minibufexpl
 	url = https://github.com/fholgado/minibufexpl.vim.git
+  ignore = dirty
