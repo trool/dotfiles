@@ -1,4 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/Users/ms333/.dotfiles/files/vim'
 let g:netrw_dirhist_2='/Users/ms333/.dotfiles/files'
+let g:netrw_dirhist_3='/Users/ms333/.dotfiles/files/vim/bundle/vim-cucumber/syntax'
+let g:netrw_dirhist_4='/Users/ms333/vim.bak'
+let g:netrw_dirhist_5='/Users/ms333/projects/ATS/code/gpe-server.bak'
+let g:netrw_dirhist_6='/Users/ms333/projects/ATS/code/testing/features'
+let g:netrw_dirhist_7='/Users/ms333/projects/ATS/code/gpe-server.bak'
+let g:netrw_dirhist_8='/Users/ms333/.dotfiles'

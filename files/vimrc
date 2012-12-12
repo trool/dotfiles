@@ -1,129 +1,121 @@
+"--Load up Pathogen
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
+filetype off
+syntax on
+filetype plugin on
 
+" choose color scheme
+colorscheme wombat
+set background=dark
+
+"---basic settings
 set tabstop=2
 set shiftwidth=2
 set nowrap
-set textwidth=80
+set textwidth=120
 set incsearch
 set smartindent
 set showcmd
 set splitbelow
 set nohlsearch
-syntax on
 set expandtab
-set wildmode=longest:full
+set wildmode=longest,full
 set wildmenu
 set visualbell t_vb=
 set nocp
 
-filetype plugin on
+" toggle comments
+map ,c gcc
 
-let xml_use_xhtml=1
-
-let themeindex=0
-map <F5> :make<Enter> 
-map <F4> :noh<Enter> 
+" toggle line numbers
 map <C-z> :set invnumber<Enter>
 
-map <C-p> :FufFile **/<CR>
-map <C-y> ,#
-map <C-t> ,$
+" goto beginning and end of line
+map <C-i> I<Esc>
+map <C-a> A<Esc>
 
+" jump between sub-views
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+" format text to fit into paragraphs
 map <C-f> {gq}
 
-map <C-n> :NERDTreeToggle<CR>
+" NERDTree setup
+map <C-t> :NERDTreeToggle<CR>
+map <C-n> :NERDTreeFocus<CR>
 map <C-b> :NERDTree<CR>:BookmarkToRoot 
 
-colorscheme darkocean
-set background=dark
+" Minibuffer setup
+map <C-m> :MiniBufExplorer<CR>
 
-map ,c gcc
 
-au BufNewFile,BufRead *.rhtml set syn=eruby
-au BufNewFile,BufRead *.rsel set syn=ruby
-au BufNewFile,BufRead *.erb set syn=eruby
-au BufNewFile,BufRead *.tex set syn=tex
-au BufNewFile,BufRead *.mm set syn=objc
 
-au BufRead,BufNewFile *.scss set ft=scss.css
-au BufRead,BufNewFile *.sass set ft=sass.css
 
+let xml_use_xhtml=1
+let NERDChristmasTree=1
+
+" setup specials for file name extensions
 augroup syntax
     autocmd!
-    autocmd BufRead,BufNewFile *.template setfiletype cpp
+  au BufNewFile,BufRead *.rhtml     set syn=eruby
+  au BufNewFile,BufRead *.rsel      set syn=ruby
+  au BufNewFile,BufRead *.erb       set syn=eruby
+  au BufNewFile,BufRead *.tex       set syn=tex
+  au BufNewFile,BufRead *.scss      set syn=scss.css
+  au BufNewFile,BufRead *.sass      set syn=sass.css
+  au BufRead,BufNewFile *.scss      set syn=scss.css
+  au BufRead,BufNewFile *.sass      set syn=sass.css
+  au BufRead,BufNewFile *.template  set syn=cpp
+  au BufRead,BufNewFile *.m         set syn=objc
+  au BufRead,BufNewFile *.mm        set syn=objc
+  au BufRead,BufNewFile *.rdf       set syn=xml
+  au BufRead,BufNewFile *.xul       set syn=xml
+  au BufRead,BufNewFile *.haml      set syn=haml
 augroup end
 
-"augroup commenting
-"    autocmd!
-"    " comment
-""    autocmd FileType ruby,python,perl,sh map ,# :s/^/#1/<CR>
-"    autocmd FileType objc,c,cpp map ,# :s/^/\/\//<CR>
-"    autocmd FileType tex,matlab map ,# :s/^/%/<CR>
-"    " uncomment
-"    autocmd FileType ruby,python,perl,sh map ,$ :s/^#//<CR>
-"    autocmd FileType tex,matlab map ,$ :s/^%//<CR>
-"    autocmd FileType c,cpp map ,$ :s/^\/\///g<CR>
-"    autocmd FileType haml map ,$ :s/^\/\///g<CR>
-"augroup end
-"
 augroup formating
     autocmd!
-    autocmd BufRead Makefile* set noexpandtab
-    autocmd BufRead *.py set noexpandtab
-    autocmd BufRead,BufNewFile *.txt set nosmartindent
-    autocmd BufRead,BufNewFile *.m set filetype=objc
-    autocmd BufRead,BufNewFile *.mm set filetype=objc
-    autocmd BufRead,BufNewFile *.rdf set filetype=xml
-    autocmd BufRead,BufNewFile *.xul set filetype=xml
-    autocmd BufRead,BufNewFile *.haml set filetype=haml
-    autocmd BufRead,BufNewFile *.haml set textwidth=0
-    autocmd BufRead,BufNewFile *.rb set textwidth=0
-    autocmd BufRead,BufNewFile *.rb set tabstop=2
-    autocmd BufRead,BufNewFile *.rb set shiftwidth=2
-    autocmd BufRead,BufNewFile *.py set textwidth=0
-    autocmd BufRead,BufNewFile *.m set textwidth=0
-    autocmd BufRead,BufNewFile *.c set textwidth=0
+    autocmd BufRead,BufNewFile Makefile*  set noexpandtab
+    autocmd BufRead,BufNewFile *.py       set noexpandtab
+    autocmd BufRead,BufNewFile *.txt      set nosmartindent
+
+    autocmd BufRead,BufNewFile *.haml     set textwidth=0
+    autocmd BufRead,BufNewFile *.py       set textwidth=0
+    autocmd BufRead,BufNewFile *.rb       set textwidth=0
+    autocmd BufRead,BufNewFile *.m        set textwidth=0
+    autocmd BufRead,BufNewFile *.c        set textwidth=0
 augroup end
 
 if has ("autocmd")
   filetype plugin indent on
 endif
 
+" Read svc.gz files
+au BufReadCmd   *.svc.gz      call tar#Browse(expand("<amatch>"))
 
-
-set makeprg=rake\ build
-
-nnoremap <F5> :buffers<CR>:buffer<Space>
-
-
-" Load matchit (% to bounce from do to end, etc.)
-runtime! macros/matchit.vim
-
-let mapleader = "\\"
+" Fuzzy Finder maps
+let mapleader = ","
 map <leader>F :FufFile<CR>
 map <leader>f :FufTaggedFile<CR>
 map <leader>t :FufTag<CR>
-map <leader>v :Rview<space>
-map <leader>c :Rcontroller<space>
-map <leader>m :Rmodel<space>
+
+" Alignment shortcuts
+let mapleader = ","
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:\zs<CR>
+vmap <Leader>a: :Tabularize /:\zs<CR>
+nmap <Leader>at :Tabularize /
+vmap <Leader>at :Tabularize /
+
+" Alignment shortcuts
+let mapleader = ","
+nmap <Leader>. mb
+nmap <Leader>, mv
 
 
-au BufReadCmd   *.svc.gz      call tar#Browse(expand("<amatch>"))
-
-" lhs comments
-map ,# :s/^/#/<CR>:nohlsearch<CR>
-map ,/ :s/^/\/\//<CR>
-map ,> :s/^/> /<CR>
-map ," :s/^/\"/<CR>
-map ,% :s/^/%/<CR>
-map ,! :s/^/!/<CR>
-map ,; :s/^/;/<CR>
-map ,- :s/^/--/<CR>
-map ,c :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR> 
 
