@@ -59,10 +59,10 @@ activity "%"      # tell me when stuff happens!           #
 ########################
 #
 
+screen -t vim 0
 screen -t vim 1
 screen -t compile 2
 screen -t browse 3
-screen -t vim 0
 
 bind = resize =
 bind + resize +1

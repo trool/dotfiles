@@ -52,9 +52,6 @@ map <C-b> :NERDTree<CR>:BookmarkToRoot
 " Minibuffer setup
 map <C-m> :MiniBufExplorer<CR>
 
-
-
-
 let xml_use_xhtml=1
 let NERDChristmasTree=1
 
@@ -105,17 +102,22 @@ map <leader>t :FufTag<CR>
 
 " Alignment shortcuts
 let mapleader = ","
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a: :Tabularize /:\zs<CR>
-vmap <Leader>a: :Tabularize /:\zs<CR>
-nmap <Leader>at :Tabularize /
-vmap <Leader>at :Tabularize /
+nmap <leader>a= :Tabularize /=<CR>
+vmap <leader>a= :Tabularize /=<CR>
+nmap <leader>a: :Tabularize /:\zs<CR>
+vmap <leader>a: :Tabularize /:\zs<CR>
+nmap <leader>at :Tabularize /
+vmap <leader>at :Tabularize /
 
 " Alignment shortcuts
 let mapleader = ","
-nmap <Leader>. mb
-nmap <Leader>, mv
+nmap <leader>. mb
+nmap <leader>, mv
 
+" Surround shortcuts
+let mapleader = ","
+nmap <leader>s ys
+nmap <leader>S yss
+vmap <leader>s S
 
 
