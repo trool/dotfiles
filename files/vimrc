@@ -26,7 +26,8 @@ set visualbell t_vb=
 set nocp
 
 " toggle comments
-map ,c gcc
+nmap ,c gcc
+vmap ,c gc
 
 " toggle line numbers
 map <C-z> :set invnumber<Enter>
@@ -104,6 +105,10 @@ map <leader>t :FufTag<CR>
 let mapleader = ","
 nmap <leader>a= :Tabularize /=<CR>
 vmap <leader>a= :Tabularize /=<CR>
+nmap <leader>a> :Tabularize /[=>]><CR>
+vmap <leader>a> :Tabularize /[=>]><CR>
+nmap <leader>a, :Tabularize /,\zs<CR>
+vmap <leader>a, :Tabularize /,\zs<CR>
 nmap <leader>a: :Tabularize /:\zs<CR>
 vmap <leader>a: :Tabularize /:\zs<CR>
 nmap <leader>at :Tabularize /
