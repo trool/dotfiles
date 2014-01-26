@@ -20,8 +20,9 @@ caption always "%{yK} $LOGNAME@%H | %d.%m.%Y | %{yK}%c | %{yK}%-Lw%{yK}%50>%{Ky}
 crlf off      # no thanks.        #
 startup_message off   # don't want this either.   #
 defscrollback 2000    # please sir, can i have some more? #
-# shell $SHELL     # i'll take my default shell.   #
-shell /bin/zsh     # i'll take my default shell.   #
+shell $SHELL     # i'll take my default shell.   #
+# shell /bin/zsh     # i'll take my default shell.   #
+>>>>>>> 1853707... minor updates
 defmonitor on     # turn monitoring on                    #
 activity "%"      # tell me when stuff happens!           #
 #########################################################################
