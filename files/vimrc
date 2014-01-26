@@ -94,6 +94,8 @@ endif
 
 " Read svc.gz files
 au BufReadCmd   *.svc.gz      call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.xiv.gz      call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.ds.gz       call tar#Browse(expand("<amatch>"))
 
 " Fuzzy Finder maps
 let mapleader = ","

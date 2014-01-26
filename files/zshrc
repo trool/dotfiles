@@ -19,12 +19,12 @@ export ZSH_THEME="shevertalov"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(brew cap gem git osx perl rails3 ssh-agent svn taskwarrior ruby bundler)
+plugins=(brew cap gem git osx perl rails ssh-agent svn taskwarrior ruby bundler)
 
 source $ZSH/oh-my-zsh.sh
 source $ZSH/custom/zsh-syntax-highlighting-filetypes.zsh
 
-eval $( gdircolors -b $HOME/.LS_COLORS )
+eval $( /usr/local/bin/gdircolors -b $HOME/.LS_COLORS )
 
 
 # Customize to your needs...
