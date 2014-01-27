@@ -24,6 +24,16 @@ set wildmode=longest,full
 set wildmenu
 set visualbell t_vb=
 set nocp
+set backspace=indent,eol,start
+
+" " trim trailing whitespace on any write
+" autocmd! BufWrite * mark ' | silent! %s/\s\+$// | norm ''
+"
+" " trim whitespace at end of file on any write
+" autocmd BufWrite * mark ' | silent! g/^[\s\l\n]*\%$/d | norm ''
+
+" nnoremap <C-]> <C-a>
+" nnoremap <C-[> <C-x>
 
 " toggle comments
 nmap ,c gcc
@@ -42,13 +52,18 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
+
 " format text to fit into paragraphs
 map <C-f> {gq}
+
+" close buffer
+let mapleader = ","
+map <leader>ww :q<CR>
 
 " NERDTree setup
 map <C-t> :NERDTreeToggle<CR>
 map <C-n> :NERDTreeFocus<CR>
-map <C-b> :NERDTree<CR>:BookmarkToRoot 
+map <C-b> :NERDTree<CR>:BookmarkToRoot<Space>
 
 " Minibuffer setup
 map <C-m> :MiniBufExplorer<CR>
@@ -93,9 +108,11 @@ if has ("autocmd")
 endif
 
 " Read svc.gz files
-au BufReadCmd   *.svc.gz      call tar#Browse(expand("<amatch>"))
-au BufReadCmd   *.xiv.gz      call tar#Browse(expand("<amatch>"))
-au BufReadCmd   *.ds.gz       call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.svc.gz     call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.ds.gz      call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.xiv.gz     call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.sonas.gz   call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.unified.gz call tar#Browse(expand("<amatch>"))
 
 " Fuzzy Finder maps
 let mapleader = ","
@@ -123,8 +140,23 @@ nmap <leader>, mv
 
 " Surround shortcuts
 let mapleader = ","
-nmap <leader>s ys
-nmap <leader>S yss
-vmap <leader>s S
+nmap <leader>u ys
+nmap <leader>U yss
+vmap <leader>u S
 
+" Vim tab shortcuts
+let mapleader = "t"
+nmap <leader>, :tabp<CR>
+nmap <leader>. :tabn<CR>
+nmap <leader>t :tabnew<CR>:TName "***"<CR>:tabp<CR>:TName "***"<CR>:tabn<CR>
+
+" Vim sort shortcuts
+let mapleader = ","
+nmap <leader>s :sort<CR>
+nmap <leader>S <S-v>/^$<CR>k:sort<CR>
+vmap <leader>s :sort<CR>
+
+" Vim shortcuts for CSS org
+let mapleader = ","
+nmap <leader>b <S-v>/^$<CR>k:sort<CR> <S-v>/^$<CR>k:Tabularize /:\zs<CR>
 
