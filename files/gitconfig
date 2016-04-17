@@ -1,0 +1,53 @@
+[user]
+	name = Maxim Shevertalov
+	email = max.shevertalov@theatsgroup.com
+[diff]
+	external = /Users/ms333/opendiff-git.sh
+[core]
+	excludesfile = /Users/ms333/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+
+[color]
+  ui = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+[alias]
+  st = status
+  ci = commit
+  br = branch
+  co = checkout
+  df = diff
+  dc = diff --cached
+  lg = log -p
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  ls = ls-files
+  lo = log --pretty=format:"%h%x09%cN%x09%ad%x20%x09%s\n" --date=local
+  
+
+  # Show files ignored by git:
+  ign = ls-files -o -i --exclude-standard
+
+[mailmap]
+  file = /Users/ms333/.mailmap
+[credential]
+	helper = osxkeychain
+[push]
+	default = simple
