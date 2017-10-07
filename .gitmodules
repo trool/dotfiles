@@ -50,3 +50,9 @@
 	path = files/vim/bundle/minibufexpl
 	url = https://github.com/fholgado/minibufexpl.vim.git
   ignore = dirty
+[submodule "files/vim/bundle/yaml-vim"]
+	path = files/vim/bundle/yaml-vim
+	url = https://github.com/ingydotnet/yaml-vim.git
+[submodule "files/vim/bundle/ctrlp"]
+	path = files/vim/bundle/ctrlp
+	url = https://github.com/kien/ctrlp.vim.git

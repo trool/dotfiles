@@ -1,6 +1,8 @@
 startup_message off
 vbell off
 
+hardstatus off
+
 
 #hardstatus alwayslastline "%{= KW}%-w%{= wk}%50>%n %t%{-}%+w%<"
 #hardstatus alwayslastline " $PWD | %c | %d.%m.%Y |  %w"
@@ -11,6 +13,7 @@ vbell off
 ###
 
 caption always "%{yK} $LOGNAME@%H | %d.%m.%Y | %{yK}%c | %{yK}%-Lw%{yK}%50>%{Ky}%n%f*%t%{-}%+Lw%<%{- Wk} |"
+# caption always "%{yK} $LOGNAME@%H | %d.%m.%Y | %{yK}%c | %{yK}%-%{Ky}%n%f*%t |"
 #caption always "$LOGNAME@%H | %d.%m.%Y | %c | %-Lw%50>%{Ky}%n%f* %t%{-}%+Lw%<%{- Wk}"
 
 ###
@@ -20,8 +23,9 @@ caption always "%{yK} $LOGNAME@%H | %d.%m.%Y | %{yK}%c | %{yK}%-Lw%{yK}%50>%{Ky}
 crlf off      # no thanks.        #
 startup_message off   # don't want this either.   #
 defscrollback 2000    # please sir, can i have some more? #
-# shell $SHELL     # i'll take my default shell.   #
-shell /bin/zsh     # i'll take my default shell.   #
+shell $SHELL     # i'll take my default shell.   #
+# shell /bin/zsh     # i'll take my default shell.   #
+>>>>>>> 1853707... minor updates
 defmonitor on     # turn monitoring on                    #
 activity "%"      # tell me when stuff happens!           #
 #########################################################################
@@ -60,22 +64,22 @@ activity "%"      # tell me when stuff happens!           #
 #
 
 screen -t vim 0
-screen -t vim 1
-screen -t compile 2
-screen -t browse 3
+screen -t exec 1
+screen -t browse 2
+screen -t other 3
 
 bind = resize =
 bind + resize +1
 bind - resize -1
 bind _ resize max
-
-# terminfo and termcap for nice 256 color terminal
-# allow bold colors - necessary for some reason
-attrcolor b ".I" 
-# tell screen how to set colors. AB = background, AF=foreground 
-termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm' 
-# erase background with current bg color 
-defbce "on" 
-
-#eval( dircolors -b $HOME/.dircolors )
-
+# 
+# # terminfo and termcap for nice 256 color terminal
+# # allow bold colors - necessary for some reason
+# attrcolor b ".I" 
+# # tell screen how to set colors. AB = background, AF=foreground 
+# termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm' 
+# # erase background with current bg color 
+# defbce "on" 
+# 
+# #eval( dircolors -b $HOME/.dircolors )
+# 

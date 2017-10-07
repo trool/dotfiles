@@ -32,8 +32,7 @@ set backspace=indent,eol,start
 " " trim whitespace at end of file on any write
 " autocmd BufWrite * mark ' | silent! g/^[\s\l\n]*\%$/d | norm ''
 
-" nnoremap <C-]> <C-a>
-" nnoremap <C-[> <C-x>
+nnoremap <C-c> <C-a>
 
 " toggle comments
 nmap ,c gcc
@@ -74,6 +73,7 @@ let NERDChristmasTree=1
 " setup specials for file name extensions
 augroup syntax
     autocmd!
+  au BufNewFile,BufRead *.rspec     set syn=rspec
   au BufNewFile,BufRead *.rhtml     set syn=eruby
   au BufNewFile,BufRead *.rsel      set syn=ruby
   au BufNewFile,BufRead *.erb       set syn=eruby
@@ -96,9 +96,15 @@ augroup formating
     autocmd BufRead,BufNewFile *.py       set noexpandtab
     autocmd BufRead,BufNewFile *.txt      set nosmartindent
 
-    autocmd BufRead,BufNewFile *.haml     set textwidth=0
+    autocmd BufRead,BufNewFile *.haml     set textwidth=0 tabstop=4 shiftwidth=4
+    autocmd BufRead,BufNewFile *.js       set textwidth=0 tabstop=4 shiftwidth=4
+    autocmd BufRead,BufNewFile *.css      set textwidth=0 tabstop=4 shiftwidth=4
+    autocmd BufRead,BufNewFile *.scss     set textwidth=0 tabstop=4 shiftwidth=4
+
     autocmd BufRead,BufNewFile *.py       set textwidth=0
-    autocmd BufRead,BufNewFile *.rb       set textwidth=0
+    autocmd BufRead,BufNewFile *.rspec    set textwidth=0 tabstop=2 shiftwidth=2 expandtab
+    autocmd BufRead,BufNewFile *.rb       set textwidth=0 tabstop=2 shiftwidth=2 expandtab
+    autocmd BufRead,BufNewFile *.json     set textwidth=0 tabstop=2 shiftwidth=2
     autocmd BufRead,BufNewFile *.m        set textwidth=0
     autocmd BufRead,BufNewFile *.c        set textwidth=0
 augroup end
@@ -107,13 +113,19 @@ if has ("autocmd")
   filetype plugin indent on
 endif
 
-" Read svc.gz files
-au BufReadCmd   *.svc.gz     call tar#Browse(expand("<amatch>"))
-au BufReadCmd   *.ds.gz      call tar#Browse(expand("<amatch>"))
-au BufReadCmd   *.xiv.gz     call tar#Browse(expand("<amatch>"))
-au BufReadCmd   *.sonas.gz   call tar#Browse(expand("<amatch>"))
-au BufReadCmd   *.unified.gz call tar#Browse(expand("<amatch>"))
-au BufReadCmd   *.vmax.gz    call tar#Browse(expand("<amatch>"))
+" Read .gz files
+au BufReadCmd   *.svc.gz          call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.ds.gz           call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.xiv.gz          call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.sonas.gz        call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.unified.gz      call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.ds8k.gz         call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.netapp7mode.gz  call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.vmware.gz       call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.flash.gz        call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.infinidat.gz    call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.infinibox.gz    call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.vmax.gz         call tar#Browse(expand("<amatch>"))
 
 " Fuzzy Finder maps
 let mapleader = ","
@@ -161,3 +173,13 @@ vmap <leader>s :sort<CR>
 let mapleader = ","
 nmap <leader>b <S-v>/^$<CR>k:sort<CR> <S-v>/^$<CR>k:Tabularize /:\zs<CR>
 
+" CtrlP Options
+" set wildignore+=*/tmp/*,*.so,*.swp,*/vendor/*
+let g:ctrlp_regexp = 1
+
+" Prettyprint shortcuts
+let mapleader = ","
+nmap <leader>pj :%!python -m json.tool<CR>
+
+" nnoremap + /\$\w\+_<CR>
+" nnoremap _ f_x~

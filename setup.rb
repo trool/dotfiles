@@ -1,9 +1,9 @@
-#!env ruby
+#!/usr/bin/env ruby
 
 require 'ap'
 require 'trollop'
 
-require 'lib/packager.rb'
+require './lib/packager.rb'
 
 
 SETUP_VERSION = "0.1-0"
