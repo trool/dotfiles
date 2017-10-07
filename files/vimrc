@@ -44,7 +44,7 @@ map <C-z> :set invnumber<Enter>
 
 " goto beginning and end of line
 map <C-i> I<Esc>
-map <C-a> A<Esc>
+" map <C-a> A<Esc>
 
 " jump between sub-views
 map <C-h> <C-w>h
@@ -113,6 +113,7 @@ au BufReadCmd   *.ds.gz      call tar#Browse(expand("<amatch>"))
 au BufReadCmd   *.xiv.gz     call tar#Browse(expand("<amatch>"))
 au BufReadCmd   *.sonas.gz   call tar#Browse(expand("<amatch>"))
 au BufReadCmd   *.unified.gz call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.vmax.gz    call tar#Browse(expand("<amatch>"))
 
 " Fuzzy Finder maps
 let mapleader = ","
