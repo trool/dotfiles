@@ -151,6 +151,10 @@ function fing(){
   find $1 -name $2
 }
 
+function api_grep(){
+  tail -f "$1"  | egrep -v ': (user|get_struct|set_struct|get_auth|customer_trial)' | egrep 'API_CALL:'
+}
+
 function error_check(){
   head -1 /share/$1/process/*/tmp/ERROR* | grep -v MAC | grep -v "<==" | grep -v Hostname | grep -v "NIC" | grep -v -e "^$"
 }

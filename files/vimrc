@@ -39,7 +39,14 @@ nmap ,c gcc
 vmap ,c gc
 
 " toggle line numbers
-map <C-z> :set invnumber<Enter>
+set number relativenumber
+
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
+map <C-z> :set invnumber invrelativenumber<Enter>
 
 " goto beginning and end of line
 map <C-i> I<Esc>
@@ -77,6 +84,7 @@ augroup syntax
   au BufNewFile,BufRead *.rhtml     set syn=eruby
   au BufNewFile,BufRead *.rsel      set syn=ruby
   au BufNewFile,BufRead *.erb       set syn=eruby
+  au BufNewFile,BufRead *.rb        set syn=ruby
   au BufNewFile,BufRead *.tex       set syn=tex
   au BufNewFile,BufRead *.scss      set syn=scss.css
   au BufNewFile,BufRead *.sass      set syn=sass.css
@@ -117,6 +125,7 @@ endif
 au BufReadCmd   *.svc.gz          call tar#Browse(expand("<amatch>"))
 au BufReadCmd   *.ds.gz           call tar#Browse(expand("<amatch>"))
 au BufReadCmd   *.xiv.gz          call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.a9000.gz        call tar#Browse(expand("<amatch>"))
 au BufReadCmd   *.sonas.gz        call tar#Browse(expand("<amatch>"))
 au BufReadCmd   *.unified.gz      call tar#Browse(expand("<amatch>"))
 au BufReadCmd   *.ds8k.gz         call tar#Browse(expand("<amatch>"))
@@ -126,6 +135,9 @@ au BufReadCmd   *.flash.gz        call tar#Browse(expand("<amatch>"))
 au BufReadCmd   *.infinidat.gz    call tar#Browse(expand("<amatch>"))
 au BufReadCmd   *.infinibox.gz    call tar#Browse(expand("<amatch>"))
 au BufReadCmd   *.vmax.gz         call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.netapp_cdot.gz  call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.gpfscluster.gz  call tar#Browse(expand("<amatch>"))
+au BufReadCmd   *.ibmi.Z          call tar#Browse(expand("<amatch>"))
 
 " Fuzzy Finder maps
 let mapleader = ","
@@ -135,14 +147,22 @@ map <leader>t :FufTag<CR>
 
 " Alignment shortcuts
 let mapleader = ","
-nmap <leader>a= :Tabularize /=<CR>
-vmap <leader>a= :Tabularize /=<CR>
-nmap <leader>a> :Tabularize /[=>]><CR>
-vmap <leader>a> :Tabularize /[=>]><CR>
+" nmap <leader>a= :Tabularize /=<CR>
+" vmap <leader>a= :Tabularize /=<CR>
+" nmap <leader>a> :Tabularize /[=>]><CR>
+" vmap <leader>a> :Tabularize /[=>]><CR>
 nmap <leader>a, :Tabularize /,\zs<CR>
 vmap <leader>a, :Tabularize /,\zs<CR>
-nmap <leader>a: :Tabularize /:\zs<CR>
-vmap <leader>a: :Tabularize /:\zs<CR>
+" nmap <leader>a: :Tabularize /:\zs<CR>
+" vmap <leader>a: :Tabularize /:\zs<CR>
+nmap <leader>a= :Tabularize 1=<CR>
+vmap <leader>a= :Tabularize 1=<CR>
+nmap <leader>a== :Tabularize 1==<CR>
+vmap <leader>a== :Tabularize 1==<CR>
+nmap <leader>a> :Tabularize 1=><CR>
+vmap <leader>a> :Tabularize 1=><CR>
+nmap <leader>a: :Tabularize 1:<CR>
+vmap <leader>a: :Tabularize 1:<CR>
 nmap <leader>at :Tabularize /
 vmap <leader>at :Tabularize /
 
@@ -183,3 +203,12 @@ nmap <leader>pj :%!python -m json.tool<CR>
 
 " nnoremap + /\$\w\+_<CR>
 " nnoremap _ f_x~
+
+set re=1
+
+let g:ctrlp_max_files=0
+
+if isdirectory(expand(".git"))
+  let g:NERDTreeBookmarksFile = '.git/.nerdtree-bookmarks'
+endif
+
